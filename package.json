@@ -1,0 +1,9 @@
+{
+    "name": "company-nodered-messanger",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "moment-timezone": "^0.5.32"
+    }
+}
