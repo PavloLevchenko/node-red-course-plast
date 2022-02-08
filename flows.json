@@ -2,8 +2,3542 @@
     {
         "id": "71de049c.c0ddac",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Webhook",
         "disabled": false,
         "info": ""
+    },
+    {
+        "id": "7e04c91f8413cc3e",
+        "type": "tab",
+        "label": "Onboarding",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "924fe7d7aa3f3646",
+        "type": "tab",
+        "label": "Menu",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9539e9e8bc81c512",
+        "type": "tab",
+        "label": "CallCenter",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6d26887a8643e7d8",
+        "type": "tab",
+        "label": "Test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "419d194b.f36288",
+        "type": "subflow",
+        "name": "APILogs",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 220,
+                "y": 152,
+                "wires": [
+                    {
+                        "id": "d835ad8e.961a6"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 2040,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "167410b9.d14267",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 2040,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "224c4691.125552",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#C0DEED",
+        "icon": "node-red/white-globe.svg"
+    },
+    {
+        "id": "36b38281ebf600eb",
+        "type": "subflow",
+        "name": "envs",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 340,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "3e447bedebf8e312"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 760,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "6bbc50e0ab445596",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C7E9C0"
+    },
+    {
+        "id": "3f81f0c9cd4a7f7c",
+        "type": "subflow",
+        "name": "Mongo",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 160,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "4f99193b2f77f525"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 440,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "4f99193b2f77f525",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#87A980",
+        "icon": "node-red/mongodb.png"
+    },
+    {
+        "id": "9663606e1ea3e454",
+        "type": "mongodb4-client",
+        "name": "",
+        "protocol": "mongodb+srv",
+        "hostname": "${MONGO_HOST}",
+        "port": "",
+        "dbName": "${MONGO_DB}",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsInsecure": false,
+        "uri": "",
+        "advanced": "",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
+        "id": "eb56379c.4a9668",
+        "type": "http request",
+        "z": "419d194b.f36288",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 1050,
+        "y": 160,
+        "wires": [
+            [
+                "bb37e40c.adbf2",
+                "6ee46a1c.a4dd94"
+            ]
+        ]
+    },
+    {
+        "id": "108290f7.a6e057",
+        "type": "function",
+        "z": "419d194b.f36288",
+        "name": "check for string",
+        "func": "let response = typeof msg.payload\nif (response == \"string\"){\nmsg.response = msg.payload\nmsg.payload = {}\n} else {\n  msg.response = JSON.stringify(msg.payload)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1480,
+        "y": 120,
+        "wires": [
+            [
+                "18678ae9.ed7d6d"
+            ]
+        ]
+    },
+    {
+        "id": "afce7f99.319aa8",
+        "type": "function",
+        "z": "419d194b.f36288",
+        "name": "check for string",
+        "func": "let response = typeof msg.payload\nif (response == \"string\"){\nmsg.response = msg.payload\nmsg.payload = {}\n} else {\n  msg.response = JSON.stringify(msg.payload)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1480,
+        "y": 200,
+        "wires": [
+            [
+                "a0e2b76d.42d498"
+            ]
+        ]
+    },
+    {
+        "id": "18678ae9.ed7d6d",
+        "type": "change",
+        "z": "419d194b.f36288",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Log.level",
+                "pt": "msg",
+                "to": "info",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log._application",
+                "pt": "msg",
+                "to": "NodeRedTG",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.stage",
+                "pt": "msg",
+                "to": "stage",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.userID",
+                "pt": "msg",
+                "to": "req.headers[\"x-userid\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.traceID",
+                "pt": "msg",
+                "to": "req.headers[\"x-uuid\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.statusCode",
+                "pt": "msg",
+                "to": "statusCode",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.outUrl",
+                "pt": "msg",
+                "to": "url",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.request",
+                "pt": "msg",
+                "to": "request",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.response",
+                "pt": "msg",
+                "to": "response",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1680,
+        "y": 120,
+        "wires": [
+            [
+                "167410b9.d14267"
+            ]
+        ]
+    },
+    {
+        "id": "a0e2b76d.42d498",
+        "type": "change",
+        "z": "419d194b.f36288",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Log.level",
+                "pt": "msg",
+                "to": "error",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log._application",
+                "pt": "msg",
+                "to": "NodeRedTG",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.stage",
+                "pt": "msg",
+                "to": "stage",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.userID",
+                "pt": "msg",
+                "to": "req.headers[\"x-userid\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.traceID",
+                "pt": "msg",
+                "to": "req.headers[\"x-uuid\"]",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.statusCode",
+                "pt": "msg",
+                "to": "statusCode",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.errorCode",
+                "pt": "msg",
+                "to": "payload.code",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.outUrl",
+                "pt": "msg",
+                "to": "url",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.request",
+                "pt": "msg",
+                "to": "request",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Log.response",
+                "pt": "msg",
+                "to": "response",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1670,
+        "y": 200,
+        "wires": [
+            [
+                "224c4691.125552"
+            ]
+        ]
+    },
+    {
+        "id": "167410b9.d14267",
+        "type": "function",
+        "z": "419d194b.f36288",
+        "name": "Log successfull ",
+        "func": "msg.payload.Log.request = JSON.stringify(msg.payload.Log.request)\nmsg.payload.Log.timestamp = new Date()\n\nnode.log(msg.payload.Log);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1880,
+        "y": 120,
+        "wires": [
+            [
+                "b7bfa263.0bd6c"
+            ]
+        ]
+    },
+    {
+        "id": "224c4691.125552",
+        "type": "function",
+        "z": "419d194b.f36288",
+        "name": "Log unsuccessfull ",
+        "func": "msg.payload.Log.timestamp = new Date()\nmsg.payload.Log.request = JSON.stringify(msg.payload.Log.request)\n\nnode.error(msg.payload.Log);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1890,
+        "y": 200,
+        "wires": [
+            [
+                "dd82213e.73baa8"
+            ]
+        ]
+    },
+    {
+        "id": "b7bfa263.0bd6c",
+        "type": "debug",
+        "z": "419d194b.f36288",
+        "name": "Log successfull",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.Log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "dd82213e.73baa8",
+        "type": "debug",
+        "z": "419d194b.f36288",
+        "name": "Log unsuccessfull",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.Log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2110,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "bb37e40c.adbf2",
+        "type": "switch",
+        "z": "419d194b.f36288",
+        "name": "http code",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^2",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1220,
+        "y": 160,
+        "wires": [
+            [
+                "108290f7.a6e057"
+            ],
+            [
+                "afce7f99.319aa8"
+            ]
+        ]
+    },
+    {
+        "id": "a2412c6c.b06f48",
+        "type": "change",
+        "z": "419d194b.f36288",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "request.method",
+                "pt": "msg",
+                "to": "method",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "request.receiver",
+                "pt": "msg",
+                "to": "receiver",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "request.lang",
+                "pt": "msg",
+                "to": "lang",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "request.state",
+                "pt": "msg",
+                "to": "state",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "request.body",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 160,
+        "wires": [
+            [
+                "eb56379c.4a9668",
+                "9c5ca2db.7fe78"
+            ]
+        ]
+    },
+    {
+        "id": "d835ad8e.961a6",
+        "type": "switch",
+        "z": "419d194b.f36288",
+        "name": "GET",
+        "property": "method",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "GET",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 152,
+        "wires": [
+            [
+                "8ebb733c.b1e77"
+            ],
+            [
+                "a2412c6c.b06f48"
+            ]
+        ]
+    },
+    {
+        "id": "8ebb733c.b1e77",
+        "type": "change",
+        "z": "419d194b.f36288",
+        "name": "set payload {}",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 120,
+        "wires": [
+            [
+                "a2412c6c.b06f48"
+            ]
+        ]
+    },
+    {
+        "id": "6ee46a1c.a4dd94",
+        "type": "debug",
+        "z": "419d194b.f36288",
+        "name": "APILogs response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9c5ca2db.7fe78",
+        "type": "debug",
+        "z": "419d194b.f36288",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3e447bedebf8e312",
+        "type": "change",
+        "z": "36b38281ebf600eb",
+        "name": "set params",
+        "rules": [
+            {
+                "t": "set",
+                "p": "chatId",
+                "pt": "msg",
+                "to": "payload.chatId",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "originalBody",
+                "pt": "msg",
+                "to": "payload.originalBody",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "state",
+                "pt": "msg",
+                "to": "payload.customer.state",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "userID",
+                "pt": "msg",
+                "to": "payload.userID",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "traceID",
+                "pt": "msg",
+                "to": "payload.traceID",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "customer",
+                "pt": "msg",
+                "to": "payload.customer",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "phone",
+                "pt": "msg",
+                "to": "payload.customer.phone",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "botName",
+                "pt": "msg",
+                "to": "payload.botSettings.botName",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "channel",
+                "pt": "msg",
+                "to": "payload.channel",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "text",
+                "pt": "msg",
+                "to": "payload.text",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "customerSettings",
+                "pt": "msg",
+                "to": "payload.customer.settings",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "companyId",
+                "pt": "msg",
+                "to": "payload.botSettings.companyId",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "botId",
+                "pt": "msg",
+                "to": "payload.botSettings.botId",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            [
+                "6bbc50e0ab445596"
+            ]
+        ]
+    },
+    {
+        "id": "6bbc50e0ab445596",
+        "type": "function",
+        "z": "36b38281ebf600eb",
+        "name": "env",
+        "func": "\nmsg.customerSettings = JSON.parse(msg.customerSettings);\nmsg.flow = msg.customerSettings.flow ? msg.customerSettings.flow : null;\n\nmsg.version = \"/v1\";\n\nmsg.messageApi = env.get(\"MESSAGES_API_URL\")+msg.version;\nmsg.messageApiKey = env.get(\"MESSAGES_API_KEY\");\nmsg.customerApi =env.get(\"CUSTOMER_API_URL\")+msg.version;\nmsg.customerApiKey = env.get(\"CUSTOMER_API_KEY\");\n\nmsg.lang = \"uk\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f99193b2f77f525",
+        "type": "mongodb4",
+        "z": "3f81f0c9cd4a7f7c",
+        "clientNode": "9663606e1ea3e454",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "name": "",
+        "x": 290,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b7d12ab73e6f54c",
+        "type": "http in",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "url": "/webhook",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "81c9592d4e044177",
+                "2d833b68.20ace4",
+                "7d779de3.592464"
+            ]
+        ]
+    },
+    {
+        "id": "81c9592d4e044177",
+        "type": "debug",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7d779de3.592464",
+        "type": "change",
+        "z": "71de049c.c0ddac",
+        "name": "set params",
+        "rules": [
+            {
+                "t": "set",
+                "p": "chatId",
+                "pt": "msg",
+                "to": "payload.chatId",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "originalBody",
+                "pt": "msg",
+                "to": "payload.originalBody",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "state",
+                "pt": "msg",
+                "to": "payload.customer.state",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "userID",
+                "pt": "msg",
+                "to": "payload.userID",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "traceID",
+                "pt": "msg",
+                "to": "payload.traceID",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "customer",
+                "pt": "msg",
+                "to": "payload.customer",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "phone",
+                "pt": "msg",
+                "to": "payload.customer.phone",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "botName",
+                "pt": "msg",
+                "to": "payload.botSettings.botName",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "channel",
+                "pt": "msg",
+                "to": "payload.channel",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "text",
+                "pt": "msg",
+                "to": "payload.text",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "customerSettings",
+                "pt": "msg",
+                "to": "payload.customer.settings",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "companyId",
+                "pt": "msg",
+                "to": "payload.botSettings.companyId",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "botId",
+                "pt": "msg",
+                "to": "payload.botSettings.botId",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "51ec2145.6eb3d"
+            ]
+        ]
+    },
+    {
+        "id": "51ec2145.6eb3d",
+        "type": "function",
+        "z": "71de049c.c0ddac",
+        "name": "env",
+        "func": "let userMessage;\nif (msg.payload.replyType) {\n    if (msg.payload.replyType == 'text') {\n        userMessage = msg.payload.originalBody.message;\n    } else if (msg.payload.replyType == 'callbackQuery') {\n        userMessage = msg.payload.originalBody.callback_query;\n    } else if (msg.payload.replyType == 'inlineQuery') {\n        userMessage = msg.payload.originalBody.inline_query;\n    }\n}\n\nif (userMessage) {\n    msg.firstName = userMessage.from.first_name ? userMessage.from.first_name : \" \";\n    msg.lastName = userMessage.from.last_name ? userMessage.from.last_name : \" \";\n    msg.userName = msg.firstName + ((msg.lastName && msg.lastName != \" \") ? (\" \" + msg.lastName) : '');\n}\n\nmsg.customerSettings = JSON.parse(msg.customerSettings);\nmsg.flow = msg.customerSettings.flow ? msg.customerSettings.flow : null;\n\nmsg.version = \"/v1\";\n\nmsg.messageApi = env.get(\"MESSAGES_API_URL\")+msg.version;\nmsg.messageApiKey = env.get(\"MESSAGES_API_KEY\");\nmsg.customerApi =env.get(\"CUSTOMER_API_URL\")+msg.version;\nmsg.customerApiKey = env.get(\"CUSTOMER_API_KEY\");\n\nmsg.GROUP_ID = env.get(\"GROUP_ID\");\n\nmsg.groupID = `${msg.companyId}_${msg.botId}_${msg.channel}_${msg.GROUP_ID}`;\n\nmsg.lang = \"uk\";\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 200,
+        "wires": [
+            [
+                "d36d7cda5952faf8",
+                "9ac26ee645db97d1"
+            ]
+        ]
+    },
+    {
+        "id": "2d833b68.20ace4",
+        "type": "change",
+        "z": "71de049c.c0ddac",
+        "name": "payload ok",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ok",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "8a194c75.eb8098"
+            ]
+        ]
+    },
+    {
+        "id": "8a194c75.eb8098",
+        "type": "http response",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 490,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "33d987f5.7a4c68",
+        "type": "function",
+        "z": "71de049c.c0ddac",
+        "name": "put firstName lastName",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"PUT\"\nmsg.url = `${msg.customerApi}/customers`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"firstName\": msg.firstName,\n    \"lastName\": msg.lastName\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 80,
+        "wires": [
+            [
+                "aa34ac46.b6629"
+            ]
+        ]
+    },
+    {
+        "id": "aa34ac46.b6629",
+        "type": "subflow:419d194b.f36288",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "env": [],
+        "x": 1200,
+        "y": 80,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d36d7cda5952faf8",
+        "type": "switch",
+        "z": "71de049c.c0ddac",
+        "name": "firstName?",
+        "property": "customer.firstName",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "33d987f5.7a4c68",
+                "90c770ae47103373"
+            ],
+            [
+                "90c770ae47103373"
+            ]
+        ]
+    },
+    {
+        "id": "db43fb8eceb37d40",
+        "type": "switch",
+        "z": "71de049c.c0ddac",
+        "name": "flow",
+        "property": "flow",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "onboarding",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "menu",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "callCenter",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 1230,
+        "y": 620,
+        "wires": [
+            [
+                "acd061e249788384"
+            ],
+            [
+                "07a080668facccbb"
+            ],
+            [
+                "e83eee7637f802b4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a1d2904cac574ec7",
+        "type": "link out",
+        "z": "71de049c.c0ddac",
+        "name": "onboarding",
+        "mode": "link",
+        "links": [
+            "c8308ece365be697"
+        ],
+        "x": 1130,
+        "y": 360,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "4502eb16cbe089cd",
+        "type": "switch",
+        "z": "71de049c.c0ddac",
+        "name": "state",
+        "property": "state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 970,
+        "y": 400,
+        "wires": [
+            [
+                "a1d2904cac574ec7"
+            ],
+            [
+                "53c02d9d133be848"
+            ]
+        ]
+    },
+    {
+        "id": "acd061e249788384",
+        "type": "link out",
+        "z": "71de049c.c0ddac",
+        "name": "onboarding",
+        "mode": "link",
+        "links": [
+            "dea296594f120471"
+        ],
+        "x": 1410,
+        "y": 560,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "9ac26ee645db97d1",
+        "type": "debug",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "3c5cb74fd275e7a1",
+        "type": "function",
+        "z": "71de049c.c0ddac",
+        "name": "put email",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"PUT\"\nmsg.url = `${msg.customerApi}/customers`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"email\": msg.email\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "07a080668facccbb",
+        "type": "link out",
+        "z": "71de049c.c0ddac",
+        "name": "menu",
+        "mode": "link",
+        "links": [
+            "c6eb915891ee6d1a"
+        ],
+        "x": 1390,
+        "y": 600,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "53c02d9d133be848",
+        "type": "switch",
+        "z": "71de049c.c0ddac",
+        "name": "text mainMenu",
+        "property": "text",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "mainMenu",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1100,
+        "y": 480,
+        "wires": [
+            [
+                "e4d35627e699211c"
+            ],
+            [
+                "db43fb8eceb37d40"
+            ]
+        ]
+    },
+    {
+        "id": "e4d35627e699211c",
+        "type": "link out",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "a6125bb8622cb6e7"
+        ],
+        "x": 1235,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "e83eee7637f802b4",
+        "type": "link out",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "9fec90f2c69c1d1e"
+        ],
+        "x": 1355,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "90c770ae47103373",
+        "type": "switch",
+        "z": "71de049c.c0ddac",
+        "name": "check group",
+        "property": "originalBody.message.chat.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "group",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 280,
+        "wires": [
+            [
+                "fc5b301b3be47e1a"
+            ],
+            [
+                "4502eb16cbe089cd"
+            ]
+        ]
+    },
+    {
+        "id": "fc5b301b3be47e1a",
+        "type": "link out",
+        "z": "71de049c.c0ddac",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "6cb5995487cde1b7",
+            "1af0faa75c8fdb82"
+        ],
+        "x": 935,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c8308ece365be697",
+        "type": "link in",
+        "z": "7e04c91f8413cc3e",
+        "name": "webhook",
+        "links": [
+            "a1d2904cac574ec7"
+        ],
+        "x": 240,
+        "y": 80,
+        "wires": [
+            [
+                "f8389946de86a040"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "d4f63a139f9ff5d3",
+        "type": "send-message",
+        "z": "7e04c91f8413cc3e",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "welcomeMessage",
+        "props": {
+            "": [],
+            "welcomeMessage": []
+        },
+        "templateId": "welcomeMessage",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "getName",
+            "getNameError",
+            "mainMenu",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Приветственное сообщение",
+        "templateDesciptionTextToCreate": "Привіт! Я станичний бот Пласту у Львові!",
+        "templateIdToCreate": "welcomeMessage",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "details": "Приветственное сообщение",
+            "text": "Привіт! Я станичний бот Пласту у Львові!"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateTimer": "",
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"uk\":{\"text\":\"Привіт! Я станичний бот Пласту у Львові!\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "welcomeMessage",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Приветственное сообщение",
+        "templateDesciptionTextToEdit": "Привіт! Я станичний бот Пласту у Львові!",
+        "x": 890,
+        "y": 80,
+        "wires": [
+            [
+                "e448e2d63548c47c"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f8389946de86a040",
+        "type": "function",
+        "z": "7e04c91f8413cc3e",
+        "name": "set flow",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"POST\"\nmsg.url = `${msg.customerApi}/settings`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"flow\": 'onboarding'\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 80,
+        "wires": [
+            [
+                "0b4608161d276cb3"
+            ]
+        ]
+    },
+    {
+        "id": "0b4608161d276cb3",
+        "type": "subflow:419d194b.f36288",
+        "z": "7e04c91f8413cc3e",
+        "name": "",
+        "env": [],
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "d4f63a139f9ff5d3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dea296594f120471",
+        "type": "link in",
+        "z": "7e04c91f8413cc3e",
+        "name": " webhook",
+        "links": [
+            "ffdf71a6eb5877b4",
+            "acd061e249788384"
+        ],
+        "x": 240,
+        "y": 260,
+        "wires": [
+            [
+                "45d1c55fbc82c2ad",
+                "e052a35c6bc5b969",
+                "973723af144be80e"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "2e69fa4b0c884ef2",
+        "type": "send-message",
+        "z": "7e04c91f8413cc3e",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "welcomeMessage2",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "welcomeMessage2": []
+        },
+        "templateId": "welcomeMessage2",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "welcomeMessage2": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Щоб усі твої запити було простіше обробляти пропоную зареєструватись.",
+                    "button1": "Зареєструватись"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "getName",
+            "getNameError",
+            "mainMenu",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Приветственное сообщение",
+        "templateDesciptionTextToCreate": "Привіт! Я станичний бот Пласту у Львові!",
+        "templateIdToCreate": "welcomeMessage2",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "buttons": [
+                "Зареєструватись"
+            ],
+            "details": "Приветственное сообщение",
+            "text": "Привіт! Я станичний бот Пласту у Львові!"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateTimer": null,
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"keyboard\":[[{\"text\":\"{{button1}}\"}]],\"uk\":{\"text\":\"Щоб усі твої запити було простіше обробляти пропоную зареєструватись.\",\"button1\":\"Зареєструватись\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "welcomeMessage2",
+        "templateDescriptionButtonsContainerToEdit": [
+            "Зареєструватись"
+        ],
+        "templateDesciptionDetailsToEdit": "Приветственное сообщение",
+        "templateDesciptionTextToEdit": "Привіт! Я станичний бот Пласту у Львові!",
+        "x": 1250,
+        "y": 80,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "45d1c55fbc82c2ad",
+        "type": "switch",
+        "z": "7e04c91f8413cc3e",
+        "name": "check state",
+        "property": "state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "welcomeMessage",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "getName",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "getPhone",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "b047552487cdc1ef"
+            ],
+            [
+                "5dbd210f2f452645"
+            ],
+            [
+                "f0ab0b632c4c4c47"
+            ]
+        ]
+    },
+    {
+        "id": "b047552487cdc1ef",
+        "type": "send-message",
+        "z": "7e04c91f8413cc3e",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "getName",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "welcomeMessage2": [],
+            "getName": []
+        },
+        "templateId": "getName",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "welcomeMessage2": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Щоб усі твої запити було простіше обробляти пропоную зареєструватись.",
+                    "button1": "Зареєструватись"
+                }
+            },
+            "getName": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Введіть, будь-ласка, ім'я та прізвище"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "getName",
+            "getNameError",
+            "mainMenu",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Запрос имени на онбординге ",
+        "templateDesciptionTextToCreate": "Введіть, будь-ласка, ім'я та прізвище",
+        "templateIdToCreate": "getName",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "details": "Запрос имени на онбординге ",
+            "text": "Введіть, будь-ласка, ім'я та прізвище"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateTimer": null,
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"uk\":{\"text\":\"Введіть, будь-ласка, ім'я та прізвище\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "getName",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Запрос имени на онбординге ",
+        "templateDesciptionTextToEdit": "Введіть, будь-ласка, ім'я та прізвище",
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "5dbd210f2f452645",
+        "type": "function",
+        "z": "7e04c91f8413cc3e",
+        "name": "check text",
+        "func": "if (msg.text && msg.text.split(\" \")[0] && msg.text.split(\" \")[1]) {\n    return msg;\n} else {\n    return [null, msg]\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 320,
+        "wires": [
+            [
+                "721f2e7bbbe7f002"
+            ],
+            [
+                "107725ff17f3ada2"
+            ]
+        ]
+    },
+    {
+        "id": "107725ff17f3ada2",
+        "type": "send-message",
+        "z": "7e04c91f8413cc3e",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "getNameError",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "welcomeMessage2": [],
+            "getName": [],
+            "getNameError": []
+        },
+        "templateId": "getNameError",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "welcomeMessage2": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Щоб усі твої запити було простіше обробляти пропоную зареєструватись.",
+                    "button1": "Зареєструватись"
+                }
+            },
+            "getName": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Введіть, будь-ласка, ім'я та прізвище"
+                }
+            },
+            "getNameError": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Це не схоже на ім'я"
+                }
+            }
+        },
+        "templatesList": [
+            "getName",
+            "getNameError",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Запрос имени на онбординге ",
+        "templateDesciptionTextToCreate": "Введіть, будь-ласка, ім'я та прізвище",
+        "templateIdToCreate": "getNameError",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "details": "Запрос имени на онбординге ",
+            "text": "Введіть, будь-ласка, ім'я та прізвище"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"keyboard\":[[{\"text\":\"{{button1}}\"}]],\"uk\":{\"text\":\"Щоб усі твої запити було простіше обробляти пропоную зареєструватись.\",\"button1\":\"Зареєструватись\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "welcomeMessage2",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Приветственное сообщение",
+        "templateDesciptionTextToEdit": "Привіт! Я станичний бот Пласту у Львові!",
+        "x": 840,
+        "y": 380,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e052a35c6bc5b969",
+        "type": "debug",
+        "z": "7e04c91f8413cc3e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "state",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "973723af144be80e",
+        "type": "debug",
+        "z": "7e04c91f8413cc3e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "text",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e448e2d63548c47c",
+        "type": "delay",
+        "z": "7e04c91f8413cc3e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1060,
+        "y": 80,
+        "wires": [
+            [
+                "2e69fa4b0c884ef2"
+            ]
+        ]
+    },
+    {
+        "id": "721f2e7bbbe7f002",
+        "type": "function",
+        "z": "7e04c91f8413cc3e",
+        "name": "put firstName lastName",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"PUT\"\nmsg.url = `${msg.customerApi}/customers`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"firstName\": msg.text.split(\" \")[0],\n    \"lastName\": msg.text.split(\" \")[1]\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 260,
+        "wires": [
+            [
+                "f6c6d3a72b335abe"
+            ]
+        ]
+    },
+    {
+        "id": "f6c6d3a72b335abe",
+        "type": "subflow:419d194b.f36288",
+        "z": "7e04c91f8413cc3e",
+        "name": "",
+        "env": [],
+        "x": 1100,
+        "y": 260,
+        "wires": [
+            [
+                "97ade37b7973385b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "97ade37b7973385b",
+        "type": "send-message",
+        "z": "7e04c91f8413cc3e",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "getPhone",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "welcomeMessage2": [],
+            "getPhone": []
+        },
+        "templateId": "getPhone",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "welcomeMessage2": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Щоб усі твої запити було простіше обробляти пропоную зареєструватись.",
+                    "button1": "Зареєструватись"
+                }
+            },
+            "getPhone": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "request_contact": true,
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Введіть, будь-ласка, номер мобільного",
+                    "button1": "Поділитись номером 📱"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "getName",
+            "getNameError",
+            "getPhone",
+            "mainMenu",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"keyboard\":[[{\"request_contact\":true,\"text\":\"{{button}}\"}]],\"uk\":{\"text\":\"Введіть, будь-ласка, номер мобільного\",\"button1\":\"Поділитись номером 📱\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Приветственное сообщение",
+        "templateDesciptionTextToCreate": "Привіт! Я станичний бот Пласту у Львові!",
+        "templateIdToCreate": "getPhone",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "details": "Приветственное сообщение",
+            "text": "Привіт! Я станичний бот Пласту у Львові!"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateTimer": "",
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"keyboard\":[[{\"request_contact\":true,\"text\":\"{{button1}}\"}]],\"uk\":{\"text\":\"Введіть, будь-ласка, номер мобільного\",\"button1\":\"Поділитись номером 📱\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "getPhone",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Приветственное сообщение",
+        "templateDesciptionTextToEdit": "Привіт! Я станичний бот Пласту у Львові!",
+        "x": 1280,
+        "y": 260,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "672cd59c0d43294b",
+        "type": "send-message",
+        "z": "7e04c91f8413cc3e",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "getPhoneError",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "welcomeMessage2": [],
+            "getPhone": [],
+            "getPhoneError": []
+        },
+        "templateId": "getPhoneError",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "welcomeMessage2": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Щоб усі твої запити було простіше обробляти пропоную зареєструватись.",
+                    "button1": "Зареєструватись"
+                }
+            },
+            "getPhone": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "request_contact": true,
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Введіть, будь-ласка, номер мобільного",
+                    "button1": "Поділитись номером 📱"
+                }
+            },
+            "getPhoneError": {
+                "text": "{{text}}",
+                "keyboard": [
+                    [
+                        {
+                            "request_contact": true,
+                            "text": "{{button1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Це не схоже на номер мобільного, натисніть будь-ласка на кнопку",
+                    "button1": "Поділитись номером 📱"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "getName",
+            "getNameError",
+            "getPhone",
+            "getPhoneError",
+            "mainMenu",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"keyboard\":[[{\"request_contact\":true,\"text\":\"{{button1}}\"}]],\"uk\":{\"text\":\"Це не схоже на номер мобільного, натисніть будь-ласка на кнопку\",\"button1\":\"Поділитись номером 📱\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [
+            "Поділитись номером"
+        ],
+        "templateDesciptionDetailsToCreate": "Сообщение в случае если номер ввели не корректно",
+        "templateDesciptionTextToCreate": "Це не схоже на номер мобільного, натисніть будь-ласка на кнопку",
+        "templateIdToCreate": "getPhoneError",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "buttons": [
+                "Поділитись номером"
+            ],
+            "details": "Сообщение в случае если номер ввели не корректно",
+            "text": "Це не схоже на номер мобільного, натисніть будь-ласка на кнопку"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"keyboard\":[[{\"request_contact\":true,\"text\":\"{{button1}}\"}]],\"uk\":{\"text\":\"Введіть, будь-ласка, номер мобільного\",\"button1\":\"Поділитись номером 📱\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "getPhone",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Приветственное сообщение",
+        "templateDesciptionTextToEdit": "Привіт! Я станичний бот Пласту у Львові!",
+        "x": 780,
+        "y": 600,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f0ab0b632c4c4c47",
+        "type": "function",
+        "z": "7e04c91f8413cc3e",
+        "name": "check phone",
+        "func": "if ((/^(([0-9]{2})|([0-9]{3}))?[0-9]{10}$/.test(msg.text.replace(/\\D/g, '')))) {\n    msg.phone = msg.text.replace(/\\D/g, '');\n    return msg;\n}\nreturn [null, msg];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 540,
+        "wires": [
+            [
+                "460c378537982c93"
+            ],
+            [
+                "672cd59c0d43294b"
+            ]
+        ]
+    },
+    {
+        "id": "460c378537982c93",
+        "type": "function",
+        "z": "7e04c91f8413cc3e",
+        "name": "put phone",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"PUT\"\nmsg.url = `${msg.customerApi}/customers`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"phone\": msg.phone\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 480,
+        "wires": [
+            [
+                "a4dc095d7d42f6bc"
+            ]
+        ]
+    },
+    {
+        "id": "a4dc095d7d42f6bc",
+        "type": "subflow:419d194b.f36288",
+        "z": "7e04c91f8413cc3e",
+        "name": "",
+        "x": 960,
+        "y": 480,
+        "wires": [
+            [
+                "583e4db6bb70618d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "583e4db6bb70618d",
+        "type": "link out",
+        "z": "7e04c91f8413cc3e",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "a6125bb8622cb6e7"
+        ],
+        "x": 1095,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a6125bb8622cb6e7",
+        "type": "link in",
+        "z": "924fe7d7aa3f3646",
+        "name": "webhook",
+        "links": [
+            "cdf0378ee8332f94",
+            "d88f1ae5435464db",
+            "583e4db6bb70618d",
+            "f7f8e96e63ded2e0",
+            "e4d35627e699211c",
+            "dd97e6dab1a03a61"
+        ],
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "f06d8bd3effb7e73"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "c6eb915891ee6d1a",
+        "type": "link in",
+        "z": "924fe7d7aa3f3646",
+        "name": "webhook",
+        "links": [
+            "d258fe2b82b525b1",
+            "07a080668facccbb"
+        ],
+        "x": 260,
+        "y": 400,
+        "wires": [
+            [
+                "8b58db0de2fc8ba9"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "e0c1eb337f60982a",
+        "type": "comment",
+        "z": "924fe7d7aa3f3646",
+        "name": "mainMenu",
+        "info": "",
+        "x": 260,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "15f693a2a86c346b",
+        "type": "send-message",
+        "z": "924fe7d7aa3f3646",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "mainMenu",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "mainMenu": []
+        },
+        "templateId": "mainMenu",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "mainMenu": {
+                "text": "{{text}}",
+                "inline": [
+                    [
+                        {
+                            "callback_data": "{{callback1}}",
+                            "text": "{{callbackText1}}"
+                        }
+                    ],
+                    [
+                        {
+                            "callback_data": "{{callback2}}",
+                            "text": "{{callbackText2}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "З яким запитом ви звертаєтесь?",
+                    "callback1": "other",
+                    "callbackText1": "Інші питання",
+                    "callback2": "booking",
+                    "callbackText2": "Бронювання приміщень"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "document",
+            "getName",
+            "getNameError",
+            "getPhone",
+            "getPhoneError",
+            "groupMessage",
+            "groupMessageAnswer",
+            "mainMenu",
+            "test",
+            "welcomeCallCenter",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Сообщение с меню",
+        "templateDesciptionTextToCreate": "З яким запитом ви звертаєтесь?",
+        "templateIdToCreate": "mainMenu",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "details": "Сообщение с меню",
+            "text": "З яким запитом ви звертаєтесь?"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateTimer": null,
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"inline\":[[{\"callback_data\":\"{{callback1}}\",\"text\":\"{{callbackText1}}\"}],[{\"callback_data\":\"{{callback2}}\",\"text\":\"{{callbackText2}}\"}]],\"uk\":{\"text\":\"З яким запитом ви звертаєтесь?\",\"callback1\":\"other\",\"callbackText1\":\"Інші питання\",\"callback2\":\"booking\",\"callbackText2\":\"Бронювання приміщень\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "mainMenu",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Сообщение с меню",
+        "templateDesciptionTextToEdit": "З яким запитом ви звертаєтесь?",
+        "x": 1010,
+        "y": 113,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "bba2131c7649dbda",
+        "type": "function",
+        "z": "924fe7d7aa3f3646",
+        "name": "set flow",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"POST\"\nmsg.url = `${msg.customerApi}/settings`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"flow\": 'menu'\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 180,
+        "wires": [
+            [
+                "9d2878ac07ac8cc4"
+            ]
+        ]
+    },
+    {
+        "id": "f06d8bd3effb7e73",
+        "type": "switch",
+        "z": "924fe7d7aa3f3646",
+        "name": "flow",
+        "property": "flow",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "menu",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 120,
+        "wires": [
+            [
+                "15f693a2a86c346b"
+            ],
+            [
+                "bba2131c7649dbda"
+            ]
+        ]
+    },
+    {
+        "id": "9d2878ac07ac8cc4",
+        "type": "subflow:419d194b.f36288",
+        "z": "924fe7d7aa3f3646",
+        "name": "",
+        "env": [],
+        "x": 820,
+        "y": 180,
+        "wires": [
+            [
+                "15f693a2a86c346b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8b58db0de2fc8ba9",
+        "type": "switch",
+        "z": "924fe7d7aa3f3646",
+        "name": "text",
+        "property": "text",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "other",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 400,
+        "wires": [
+            [
+                "2fd53e15c4eadc3c"
+            ],
+            [
+                "f7f8e96e63ded2e0"
+            ]
+        ]
+    },
+    {
+        "id": "f7f8e96e63ded2e0",
+        "type": "link out",
+        "z": "924fe7d7aa3f3646",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "a6125bb8622cb6e7"
+        ],
+        "x": 595,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "2fd53e15c4eadc3c",
+        "type": "link out",
+        "z": "924fe7d7aa3f3646",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "2b7eeffe2033f8dd",
+            "e9690d0443c603e8"
+        ],
+        "x": 595,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "732a45184422efbb",
+        "type": "send-message",
+        "z": "9539e9e8bc81c512",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "welcomeCallCenter",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "mainMenu": [],
+            "welcomeCallCenter": []
+        },
+        "templateId": "welcomeCallCenter",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "mainMenu": {
+                "text": "{{text}}",
+                "inline": [
+                    [
+                        {
+                            "callback_data": "{{callback1}}",
+                            "text": "{{callbackText1}}"
+                        }
+                    ],
+                    [
+                        {
+                            "callback_data": "{{callback2}}",
+                            "text": "{{callbackText2}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "З яким запитом ви звертаєтесь?",
+                    "callback1": "other",
+                    "callbackText1": "Інші питання",
+                    "callback2": "booking",
+                    "callbackText2": "Бронювання приміщень"
+                }
+            },
+            "welcomeCallCenter": {
+                "text": "{{text}}",
+                "inline": [
+                    [
+                        {
+                            "callback_data": "{{callback1}}",
+                            "text": "{{callbackText1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Введіть ваше питання",
+                    "callback1": "mainMenu",
+                    "callbackText1": "<< До головного меню"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "document",
+            "getName",
+            "getNameError",
+            "getPhone",
+            "getPhoneError",
+            "groupMessage",
+            "groupMessageAnswer",
+            "mainMenu",
+            "test",
+            "welcomeCallCenter",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Сообщение с меню",
+        "templateDesciptionTextToCreate": "З яким запитом ви звертаєтесь?",
+        "templateIdToCreate": "welcomeCallCenter",
+        "templateGroupToCreate": "onboarding",
+        "currentTemplateDescription": {
+            "details": "Сообщение с меню",
+            "text": "З яким запитом ви звертаєтесь?"
+        },
+        "currentTemplateGroup": "onboarding",
+        "currentTemplateTimer": null,
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"inline\":[[{\"callback_data\":\"{{callback1}}\",\"text\":\"{{callbackText1}}\"}]],\"uk\":{\"text\":\"Введіть ваше питання\",\"callback1\":\"mainMenu\",\"callbackText1\":\"<< До головного меню\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "welcomeCallCenter",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Сообщение с меню",
+        "templateDesciptionTextToEdit": "З яким запитом ви звертаєтесь?",
+        "x": 650,
+        "y": 120,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e9690d0443c603e8",
+        "type": "link in",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "links": [
+            "2fd53e15c4eadc3c"
+        ],
+        "x": 175,
+        "y": 120,
+        "wires": [
+            [
+                "5926acc80e80577a"
+            ]
+        ]
+    },
+    {
+        "id": "5926acc80e80577a",
+        "type": "function",
+        "z": "9539e9e8bc81c512",
+        "name": "set flow",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"POST\"\nmsg.url = `${msg.customerApi}/settings`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"flow\": 'callCenter'\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "a3d50c2f88b4b946"
+            ]
+        ]
+    },
+    {
+        "id": "a3d50c2f88b4b946",
+        "type": "subflow:419d194b.f36288",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "env": [],
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "732a45184422efbb"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9fec90f2c69c1d1e",
+        "type": "link in",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "links": [
+            "bf8b329321fc1f87",
+            "e83eee7637f802b4"
+        ],
+        "x": 175,
+        "y": 340,
+        "wires": [
+            [
+                "f8220dd79b32687e",
+                "9e1c2c99ab78bc5d"
+            ]
+        ]
+    },
+    {
+        "id": "f8220dd79b32687e",
+        "type": "switch",
+        "z": "9539e9e8bc81c512",
+        "name": "state",
+        "property": "state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "welcomeCallCenter",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 290,
+        "y": 340,
+        "wires": [
+            [
+                "803fdd8a30aabb81"
+            ],
+            [
+                "dd97e6dab1a03a61"
+            ]
+        ]
+    },
+    {
+        "id": "803fdd8a30aabb81",
+        "type": "send-message",
+        "z": "9539e9e8bc81c512",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "groupMessage",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "mainMenu": [],
+            "welcomeCallCenter": [],
+            "groupMessage": [
+                {
+                    "property": "chatID",
+                    "value": "chatId",
+                    "valueType": "msg"
+                },
+                {
+                    "property": "userName",
+                    "value": "userName",
+                    "valueType": "msg"
+                },
+                {
+                    "property": "textCustomer",
+                    "value": "text",
+                    "valueType": "msg"
+                }
+            ]
+        },
+        "templateId": "groupMessage",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "mainMenu": {
+                "text": "{{text}}",
+                "inline": [
+                    [
+                        {
+                            "callback_data": "{{callback1}}",
+                            "text": "{{callbackText1}}"
+                        }
+                    ],
+                    [
+                        {
+                            "callback_data": "{{callback2}}",
+                            "text": "{{callbackText2}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "З яким запитом ви звертаєтесь?",
+                    "callback1": "other",
+                    "callbackText1": "Інші питання",
+                    "callback2": "booking",
+                    "callbackText2": "Бронювання приміщень"
+                }
+            },
+            "welcomeCallCenter": {
+                "text": "{{text}}",
+                "inline": [
+                    [
+                        {
+                            "callback_data": "{{callback1}}",
+                            "text": "{{callbackText1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Введіть ваше питання",
+                    "callback1": "mainMenu",
+                    "callbackText1": "<< До головного меню"
+                }
+            },
+            "groupMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "id: {{chatID}}\nКористувач {{userName}} запитує:\n\n{{textCustomer}}"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "document",
+            "getName",
+            "getNameError",
+            "getPhone",
+            "getPhoneError",
+            "groupMessage",
+            "groupMessageAnswer",
+            "mainMenu",
+            "test",
+            "welcomeCallCenter",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "groupID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Сообщение с меню",
+        "templateDesciptionTextToCreate": "З яким запитом ви звертаєтесь?",
+        "templateIdToCreate": "groupMessage",
+        "templateGroupToCreate": "group",
+        "currentTemplateDescription": {
+            "details": "Сообщение с меню",
+            "text": "З яким запитом ви звертаєтесь?"
+        },
+        "currentTemplateGroup": "group",
+        "currentTemplateTimer": null,
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"uk\":{\"text\":\"id: {{chatID}}\\nКористувач {{userName}} запитує:\\n\\n{{textCustomer}}\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "groupMessage",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Сообщение с меню",
+        "templateDesciptionTextToEdit": "З яким запитом ви звертаєтесь?",
+        "x": 480,
+        "y": 280,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c3a41444e82c4ea1",
+        "type": "function",
+        "z": "9539e9e8bc81c512",
+        "name": "set ",
+        "func": "// msg.payload = {\n//     chatId: msg.chatId,\n//     userText: msg.text\n// }\n\n// global.set(`order_${msg._msgid}`, msg.payload)\n\nmsg.collection = 'orders'\nmsg.operation = 'insertOne'; \nmsg.payload = [{ \"orderId\": msg._msgid, \"chatId\": msg.chatId}]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "c554fb822b8226af"
+            ]
+        ]
+    },
+    {
+        "id": "dd97e6dab1a03a61",
+        "type": "link out",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "a6125bb8622cb6e7"
+        ],
+        "x": 415,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1af0faa75c8fdb82",
+        "type": "link in",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "links": [
+            "fc5b301b3be47e1a"
+        ],
+        "x": 175,
+        "y": 620,
+        "wires": [
+            [
+                "4999afdcb7bcc6c8"
+            ]
+        ]
+    },
+    {
+        "id": "8dc12d5f6cda547b",
+        "type": "function",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "func": "msg.id = msg.originalBody.message.reply_to_message.text.split(\"\\n\")[0].split(\" \")[1];\n\n// msg.order = global.get(`order_${msg.id}`);\n\nmsg.collection = 'orders'\nmsg.operation = 'find'\nmsg.payload = [{ \"orderId\": msg.id }]\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 540,
+        "wires": [
+            [
+                "689b2f7b98a14e4d",
+                "fe5d11acd58eff9b"
+            ]
+        ]
+    },
+    {
+        "id": "113de2c2bca5d714",
+        "type": "function",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "func": "msg.userID = `${msg.companyId}_${msg.botId}_${msg.channel}_${msg.payload[0].chatId}`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 540,
+        "wires": [
+            [
+                "39e72eacd8e217e4"
+            ]
+        ]
+    },
+    {
+        "id": "39e72eacd8e217e4",
+        "type": "send-message",
+        "z": "9539e9e8bc81c512",
+        "isTimerUsed": false,
+        "language": "lang",
+        "languageType": "msg",
+        "messageOption": "",
+        "messageID": "",
+        "messageIDType": "str",
+        "name": "groupMessageAnswer",
+        "props": {
+            "": [],
+            "welcomeMessage": [],
+            "mainMenu": [],
+            "welcomeCallCenter": [],
+            "groupMessage": [
+                {
+                    "property": "msgId",
+                    "value": "_msgid",
+                    "valueType": "msg"
+                },
+                {
+                    "property": "userName",
+                    "value": "userName",
+                    "valueType": "msg"
+                },
+                {
+                    "property": "textCustomer",
+                    "value": "text",
+                    "valueType": "msg"
+                }
+            ],
+            "groupMessageAnswer": [
+                {
+                    "property": "operatorText",
+                    "value": "text",
+                    "valueType": "msg"
+                }
+            ]
+        },
+        "templateId": "groupMessageAnswer",
+        "templateIdToDelete": "",
+        "templatesJsons": {
+            "welcomeMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "Привіт! Я станичний бот Пласту у Львові!"
+                }
+            },
+            "mainMenu": {
+                "text": "{{text}}",
+                "inline": [
+                    [
+                        {
+                            "callback_data": "{{callback1}}",
+                            "text": "{{callbackText1}}"
+                        }
+                    ],
+                    [
+                        {
+                            "callback_data": "{{callback2}}",
+                            "text": "{{callbackText2}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "З яким запитом ви звертаєтесь?",
+                    "callback1": "other",
+                    "callbackText1": "Інші питання",
+                    "callback2": "booking",
+                    "callbackText2": "Бронювання приміщень"
+                }
+            },
+            "welcomeCallCenter": {
+                "text": "{{text}}",
+                "inline": [
+                    [
+                        {
+                            "callback_data": "{{callback1}}",
+                            "text": "{{callbackText1}}"
+                        }
+                    ]
+                ],
+                "uk": {
+                    "text": "Введіть ваше питання",
+                    "callback1": "mainMenu",
+                    "callbackText1": "<< До головного меню"
+                }
+            },
+            "groupMessage": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "id: {{msgId}}\nКористувач {{userName}} запитує:\n\n{{textCustomer}}"
+                }
+            },
+            "groupMessageAnswer": {
+                "text": "{{text}}",
+                "uk": {
+                    "text": "{{operatorText}}"
+                }
+            }
+        },
+        "templatesList": [
+            "Test",
+            "Test2",
+            "getName",
+            "getNameError",
+            "getPhone",
+            "getPhoneError",
+            "groupMessage",
+            "groupMessageAnswer",
+            "mainMenu",
+            "welcomeCallCenter",
+            "welcomeMessage",
+            "welcomeMessage2"
+        ],
+        "userID": "userID",
+        "userIDType": "msg",
+        "traceID": "traceID",
+        "traceIDType": "msg",
+        "useTimer": false,
+        "timer": "",
+        "outputs": 3,
+        "jsonToCreate": "{\"text\":\"{{text}}\",\"en\":{\"text\":\"hello message\"}}",
+        "jsonToCreateType": "json",
+        "templateDescriptionButtonsContainerToCreate": [],
+        "templateDesciptionDetailsToCreate": "Сообщение с меню",
+        "templateDesciptionTextToCreate": "З яким запитом ви звертаєтесь?",
+        "templateIdToCreate": "groupMessageAnswer",
+        "templateGroupToCreate": "group",
+        "currentTemplateDescription": {
+            "details": "Сообщение с меню",
+            "text": "З яким запитом ви звертаєтесь?"
+        },
+        "currentTemplateGroup": "group",
+        "currentTemplateTimer": null,
+        "currentTemplateType": "standard",
+        "jsonToEdit": "{\"text\":\"{{text}}\",\"uk\":{\"text\":\"id: {{msgId}}\\nКористувач {{userName}} запитує:\\n\\n{{textCustomer}}\"}}",
+        "jsonToEditType": "json",
+        "templateIdToEdit": "groupMessage",
+        "templateDescriptionButtonsContainerToEdit": [],
+        "templateDesciptionDetailsToEdit": "Сообщение с меню",
+        "templateDesciptionTextToEdit": "З яким запитом ви звертаєтесь?",
+        "x": 1100,
+        "y": 620,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c554fb822b8226af",
+        "type": "subflow:3f81f0c9cd4a7f7c",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "x": 1010,
+        "y": 260,
+        "wires": [
+            [
+                "4f94e7f2024e7450"
+            ]
+        ]
+    },
+    {
+        "id": "7c1f7bcababbc07c",
+        "type": "function",
+        "z": "9539e9e8bc81c512",
+        "name": "set ",
+        "func": "// msg.payload = {\n//     chatId: msg.chatId,\n//     userText: msg.text\n// }\n\n// global.set(`order_${msg._msgid}`, msg.payload)\n\nmsg.collection = 'orders'\nmsg.operation = 'insertOne'\nmsg.payload = [{ \"id\": 2, \"productName\": \"apple\" }]\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 800,
+        "wires": [
+            [
+                "86de9648bec47b97"
+            ]
+        ]
+    },
+    {
+        "id": "86de9648bec47b97",
+        "type": "subflow:3f81f0c9cd4a7f7c",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "x": 670,
+        "y": 800,
+        "wires": [
+            [
+                "2f256988f22079b8"
+            ]
+        ]
+    },
+    {
+        "id": "25fc4cdbdfddf345",
+        "type": "subflow:3f81f0c9cd4a7f7c",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "x": 660,
+        "y": 720,
+        "wires": [
+            [
+                "43dfc53755d00940"
+            ]
+        ]
+    },
+    {
+        "id": "f88f062add1442a7",
+        "type": "inject",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 720,
+        "wires": [
+            [
+                "82fc9acaefdb271a"
+            ]
+        ]
+    },
+    {
+        "id": "82fc9acaefdb271a",
+        "type": "function",
+        "z": "9539e9e8bc81c512",
+        "name": "set ",
+        "func": "\nmsg.collection = 'orders'\nmsg.operation = 'find'; \nmsg.payload = [{\"orderId\": \"123\", \"test\": \"1\"}]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 720,
+        "wires": [
+            [
+                "25fc4cdbdfddf345"
+            ]
+        ]
+    },
+    {
+        "id": "43dfc53755d00940",
+        "type": "debug",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "3dbcc36e73a9a109",
+        "type": "inject",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 800,
+        "wires": [
+            [
+                "7c1f7bcababbc07c"
+            ]
+        ]
+    },
+    {
+        "id": "2f256988f22079b8",
+        "type": "debug",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "9e1c2c99ab78bc5d",
+        "type": "debug",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 230,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "689b2f7b98a14e4d",
+        "type": "subflow:3f81f0c9cd4a7f7c",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "x": 640,
+        "y": 540,
+        "wires": [
+            [
+                "113de2c2bca5d714",
+                "6e98600fa28b93a5"
+            ]
+        ]
+    },
+    {
+        "id": "6e98600fa28b93a5",
+        "type": "debug",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "4f94e7f2024e7450",
+        "type": "debug",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "fe5d11acd58eff9b",
+        "type": "debug",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "id",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "4999afdcb7bcc6c8",
+        "type": "function",
+        "z": "9539e9e8bc81c512",
+        "name": "",
+        "func": "msg.chatId = msg.originalBody.message.reply_to_message.text.split(\"\\n\")[0].split(\" \")[1];\n\nmsg.userID = `${msg.companyId}_${msg.botId}_${msg.channel}_${msg.chatId}`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 620,
+        "wires": [
+            [
+                "39e72eacd8e217e4"
+            ]
+        ]
+    },
+    {
+        "id": "8919fe9f0be88f7f",
+        "type": "inject",
+        "z": "6d26887a8643e7d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "566295b13e93762a"
+            ]
+        ]
+    },
+    {
+        "id": "83d0cea0f8c996be",
+        "type": "function",
+        "z": "6d26887a8643e7d8",
+        "name": "put firstName lastName",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"PUT\"\nmsg.url = `${msg.customerApi}/customers`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"state\": null\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 160,
+        "wires": [
+            [
+                "18bbd46aa4ca8493"
+            ]
+        ]
+    },
+    {
+        "id": "18bbd46aa4ca8493",
+        "type": "subflow:419d194b.f36288",
+        "z": "6d26887a8643e7d8",
+        "name": "",
+        "env": [],
+        "x": 1040,
+        "y": 160,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "566295b13e93762a",
+        "type": "change",
+        "z": "6d26887a8643e7d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "userID",
+                "pt": "msg",
+                "to": "43_12_TG_1426860705",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "traceID",
+                "pt": "msg",
+                "to": "349a12c5-59b1-4883-b3ef-0482df676d9a",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "2dbb7785d2c6f4f3"
+            ]
+        ]
+    },
+    {
+        "id": "2dbb7785d2c6f4f3",
+        "type": "function",
+        "z": "6d26887a8643e7d8",
+        "name": "env",
+        "func": "\nmsg.version = \"/v1\";\n\nmsg.messageApi = env.get(\"MESSAGES_API_URL\")+msg.version;\nmsg.messageApiKey = env.get(\"MESSAGES_API_KEY\");\nmsg.customerApi =env.get(\"CUSTOMER_API_URL\")+msg.version;\nmsg.customerApiKey = env.get(\"CUSTOMER_API_KEY\");\n\nmsg.lang = \"uk\";\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "83d0cea0f8c996be"
+            ]
+        ]
+    },
+    {
+        "id": "9791c633cb551c1e",
+        "type": "function",
+        "z": "6d26887a8643e7d8",
+        "name": "",
+        "func": "msg.service = \"CustomerAPI\"\n\nmsg.method = \"POST\"\nmsg.url = `${msg.customerApi}/customers`;\nmsg.headers = {\n    'authorization': msg.customerApiKey,\n    'x-trace-id': msg.traceID,\n    'x-user-id': msg.userID\n}\n\nmsg.payload = {\n    \"chatId\": \"-619646899\",\n    \"channel\": \"TG\",\n    \"language\": \"ru\",\n    \"companyId\": \"43\",\n    \"botId\": \"12\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 320,
+        "wires": [
+            [
+                "4b66134961dec2c3"
+            ]
+        ]
+    },
+    {
+        "id": "59d23a0ed1d718b5",
+        "type": "inject",
+        "z": "6d26887a8643e7d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "1651ddb3917d1cd3"
+            ]
+        ]
+    },
+    {
+        "id": "1651ddb3917d1cd3",
+        "type": "change",
+        "z": "6d26887a8643e7d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "userID",
+                "pt": "msg",
+                "to": "43_12_TG_-619646899",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "traceID",
+                "pt": "msg",
+                "to": "349a12c5-59b1-4883-b3ef-0482df676d9a",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 320,
+        "wires": [
+            [
+                "c764e3fda2a95936"
+            ]
+        ]
+    },
+    {
+        "id": "c764e3fda2a95936",
+        "type": "function",
+        "z": "6d26887a8643e7d8",
+        "name": "env",
+        "func": "\nmsg.version = \"/v1\";\n\nmsg.messageApi = env.get(\"MESSAGES_API_URL\")+msg.version;\nmsg.messageApiKey = env.get(\"MESSAGES_API_KEY\");\nmsg.customerApi =env.get(\"CUSTOMER_API_URL\")+msg.version;\nmsg.customerApiKey = env.get(\"CUSTOMER_API_KEY\");\n\nmsg.lang = \"uk\";\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "9791c633cb551c1e"
+            ]
+        ]
+    },
+    {
+        "id": "4b66134961dec2c3",
+        "type": "subflow:419d194b.f36288",
+        "z": "6d26887a8643e7d8",
+        "name": "",
+        "env": [],
+        "x": 920,
+        "y": 320,
+        "wires": [
+            [],
+            []
+        ]
     }
 ]
