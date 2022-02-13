@@ -1,9 +1,22 @@
 {
-    "name": "company-nodered-messanger",
-    "description": "A Node-RED Project",
-    "version": "0.0.1",
-    "private": true,
-    "dependencies": {
-        "moment-timezone": "^0.5.32"
-    }
+  "name": "company-nodered-messanger",
+  "description": "A Node-RED Project",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "pm2": "pm2 start ignore.pm2.config.js",
+    "ngrok": "ngrok start nodered -config=ignore.ngrok.yml",
+    "restart": "pm2 restart all",
+    "kill": "pm2 kill"
+  },
+  "dependencies": {
+    "@chatbots-studio/cbs-platform-node-red-palette": "1.17.2",
+    "axios": "^0.25.0",
+    "moment-timezone": "^0.5.32",
+    "ngrok": "^4.3.0",
+    "node-red": "^2.2.0",
+    "node-red-contrib-mongodb4": "^1.2.3",
+    "node-red-debugger": "^1.1.1",
+    "pm2": "^5.1.2"
+  }
 }
